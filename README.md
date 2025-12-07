@@ -1,219 +1,197 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Quant Trading Strategy Backtester</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#0b1726; line-height:1.6; margin:0; padding:0; background:#f7fafc; }
-    .container { max-width:900px; margin:40px auto; padding:28px; background:#ffffff; border-radius:12px; box-shadow:0 8px 30px rgba(11,23,38,0.06); }
-    header { display:flex; align-items:center; gap:18px; margin-bottom:20px; }
-    header img { width:64px; height:64px; object-fit:cover; border-radius:8px; }
-    h1 { margin:0; font-size:26px; }
-    .subtitle { color:#475569; margin-top:6px; font-size:14px; }
-    .badges { margin-top:12px; }
-    .badges img { height:20px; margin-right:8px; vertical-align:middle; }
-    section { margin-top:22px; }
-    h2 { font-size:18px; margin-bottom:12px; color:#0f172a; }
-    pre { background:#0b1220; color:#cfe8ff; padding:12px; border-radius:8px; overflow:auto; font-size:13px; }
-    code { background:#eef2ff; padding:2px 6px; border-radius:6px; font-family:monospace; }
-    ul { margin:0 0 12px 18px; }
-    .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    .card { background:#f1f5f9; padding:14px; border-radius:10px; border:1px solid #e2e8f0; }
-    .metrics { display:flex; gap:12px; flex-wrap:wrap; }
-    .metric { background:#fff; padding:10px 12px; border-radius:10px; box-shadow:0 2px 6px rgba(2,6,23,0.04); }
-    .footer { color:#64748b; font-size:13px; margin-top:26px; border-top:1px dashed #e6eef7; padding-top:16px; }
-    a { color:#0b69ff; text-decoration:none; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <img alt="logo" src="assets/logo.png" onerror="this.style.display='none'"/>
-      <div>
-        <h1>Quant Trading Strategy Backtester</h1>
-        <div class="subtitle">Modular Python backtesting engine with strategies, optimisation, metrics & Streamlit dashboard</div>
-        <div class="badges">
-          <!-- Replace badges or remove if not available -->
-          <img alt="python" src="https://img.shields.io/badge/python-3.8%2B-blue"/>
-          <img alt="license" src="https://img.shields.io/badge/license-MIT-brightgreen"/>
-        </div>
-      </div>
-    </header>
+# Quant Trading Strategy Backtester
 
-    <section>
-      <h2>Project Overview</h2>
-      <p>
-        This repository implements a production-style quantitative backtesting platform written in Python.
-        It supports multiple strategies (Moving Average Crossover, RSI, Mean Reversion, Pairs Trading), a
-        vectorized returns engine (Polars), an optimisation module, and an interactive Streamlit dashboard to
-        visualise results. Results are persisted to a local SQLite database for reproducibility and comparison.
-      </p>
-    </section>
+A modular Python-based quantitative trading backtesting engine with multiple strategies, parameter optimisation, rich performance analytics, and an interactive Streamlit dashboard.[1]
 
-    <section>
-      <h2>Key Features</h2>
-      <div class="grid">
-        <div class="card">
-          <strong>Backtester Engine</strong>
-          <ul>
-            <li>Vectorized returns & equity curve computation (Polars)</li>
-            <li>Pluggable strategy interface (add custom strategies)</li>
-            <li>Trade simulation with positions & PnL</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Strategies Included</strong>
-          <ul>
-            <li>Moving Average Crossover</li>
-            <li>RSI-based entry/exit</li>
-            <li>Mean Reversion</li>
-            <li>Pairs Trading</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Analytics & Metrics</strong>
-          <ul>
-            <li>Sharpe, Sortino, CAGR, Max Drawdown</li>
-            <li>Profit Factor, Win Rate, # Trades</li>
-            <li>Monthly returns and heatmap</li>
-          </ul>
-        </div>
-        <div class="card">
-          <strong>Dashboard & Storage</strong>
-          <ul>
-            <li>Streamlit UI with interactive charts</li>
-            <li>SQLite + SQLAlchemy persistence</li>
-            <li>Unit tests using pytest (reliability)</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+***
 
-    <section>
-      <h2>Tech Stack</h2>
-      <ul>
-        <li><strong>Language:</strong> Python 3.8+</li>
-        <li><strong>Data engine:</strong> Polars (fast vectorized operations)</li>
-        <li><strong>Data source:</strong> yfinance</li>
-        <li><strong>Dashboard:</strong> Streamlit (+ Plotly/Matplotlib for visuals)</li>
-        <li><strong>DB:</strong> SQLite via SQLAlchemy</li>
-        <li><strong>Testing:</strong> pytest</li>
-      </ul>
-    </section>
+## Overview
 
-    <section>
-      <h2>Install & Quick Start</h2>
+This project provides an end-to-end workflow for researching and validating systematic trading strategies using historical market data.  It is suitable for learning algorithmic trading concepts, rapid strategy iteration, and showcasing as a resume-ready quant/fintech project.[2][1]
 
-      <p>Run the following commands in your project root (tested on Windows/macOS/Linux):</p>
+***
 
-      <pre><code>git clone &lt;your-repo-url&gt;
+## Features
+
+- Fetches historical OHLCV data using `yfinance` for any supported ticker.[3]
+- Runs predefined or custom strategies through a modular backtesting engine.[1]
+- Computes portfolio returns, PnL, drawdowns, and institutional-grade metrics (Sharpe, Sortino, CAGR, max drawdown).[4]
+- Supports parameter optimisation and automatic selection of best-performing tickers.[1]
+- Persists runs to SQLite via SQLAlchemy for historical comparison and reproducibility.[1]
+- Visualises results and comparisons through an interactive Streamlit dashboard.[5][6]
+
+***
+
+## Tech Stack
+
+- **Language**: Python 3.8+  
+- **Data Engine**: Polars, Pandas  
+- **Market Data**: `yfinance`  
+- **UI Dashboard**: Streamlit  
+- **Database**: SQLite + SQLAlchemy  
+- **Testing**: pytest  
+- **Visualisation**: Matplotlib / Plotly[7][1]
+
+***
+
+## Backtesting Engine
+
+- Vectorised return computation using Polars for fast backtests on large datasets.[3]
+- Supports long/flat and long/short position signals with equity curve tracking.[4]
+- Tracks cumulative returns, daily returns, trade count, win rate, profit factor, and risk-adjusted metrics.[8]
+
+***
+
+## Included Strategies
+
+- Moving Average Crossover  
+- RSI-based Trading Strategy  
+- Mean Reversion Strategy  
+- (Optional extension) Pairs Trading framework[9][1]
+
+Each strategy inherits from a common base class, making it easy to plug in custom logic or extend existing strategies.[3]
+
+***
+
+## Analytics & Metrics
+
+The engine computes commonly used performance statistics for quantitative evaluation:[8][4]
+
+- CAGR (Compounded Annual Growth Rate)  
+- Annualised volatility  
+- Sharpe and Sortino ratios  
+- Maximum drawdown and drawdown duration  
+- Profit factor and win rate  
+- Monthly return breakdown and equity curve
+
+Example (replace with your actual results):
+
+| Metric        | Value    |
+|--------------|----------|
+| Total Return | +31.94%  |
+| CAGR         | 7.19%    |
+| Sharpe Ratio | 0.70     |
+| Max Drawdown | -9.80%   |
+| Win Rate     | 73%      |
+| Profit Factor| 1.56     |
+
+***
+
+## Dashboard
+
+The Streamlit app provides an interactive front-end for exploring strategies and results.[6][5]
+
+- Interactive equity curve and drawdown charts  
+- Strategy comparison view across key metrics  
+- Ticker, strategy, and parameter selection from the UI  
+- Raw data preview and historical backtest results loaded from SQLite
+
+Run the dashboard from the project root:
+
+```bash
+streamlit run src/quant_trading_strategy_backtester/app_v2.py
+```
+
+***
+
+## Installation
+
+```bash
+git clone <your-repo-url>
 cd quant-trading-strategy-backtester
+
 python -m venv venv
-# Windows (PowerShell)
-venv\Scripts\Activate.ps1
-# macOS / Linux
+# Windows
+venv\Scripts\activate
+# Mac/Linux
 # source venv/bin/activate
 
 pip install -r requirements.txt
-# if you used a minimal requirements file, ensure these are present:
-# pandas numpy matplotlib yfinance ta scikit-learn polars streamlit sqlalchemy pytest
-</code></pre>
+```
 
-      <p>Run unit tests:</p>
-      <pre><code>python -m pytest</code></pre>
+This setup mirrors typical Python backtesting projects using virtual environments and requirements files.[10][3]
 
-      <p>Run a quick backtest script (example):</p>
-      <pre><code>python run_backtest.py
-# outputs saved in results/ and a plot: equity_curve.png
-</code></pre>
+***
 
-      <p>Run the Streamlit dashboard (recommended):</p>
-      <pre><code>cd &lt;project-root&gt;
-streamlit run src/quant_trading_strategy_backtester/app_v2.py
-</code></pre>
-    </section>
+## Running a Sample Backtest
 
-    <section>
-      <h2>Usage Examples</h2>
+From the project root:
 
-      <h3>Run Moving Average Backtest (example)</h3>
-      <pre><code>python run_backtest.py
-# or call directly from python:
-# from quant_trading_strategy_backtester.backtester import Backtester
-# from quant_trading_strategy_backtester.strategies.moving_average_crossover import MovingAverageCrossoverStrategy
-# and call Backtester(data, strategy).run()
-</code></pre>
-
-      <h3>Run RSI Strategy</h3>
-      <pre><code># change params in run_backtest.py to use RSIStrategy
+```bash
 python run_backtest.py
-</code></pre>
-    </section>
+```
 
-    <section>
-      <h2>Project Structure</h2>
-      <pre><code>quant-trading-strategy-backtester/
+This will:
+
+- Fetch historical data for the configured ticker(s)  
+- Run the selected strategy and compute metrics  
+- Save the equity curve plot to `assets/equity_curve.png`  
+- Print performance metrics to the console[1]
+
+You can then open the Streamlit dashboard to inspect results interactively.
+
+***
+
+## Project Structure
+
+```text
+quant-trading-strategy-backtester/
 ├─ src/quant_trading_strategy_backtester/
-│  ├─ backtester.py
-│  ├─ data.py
-│  ├─ models.py
+│  ├─ backtester.py          # Core backtesting engine
+│  ├─ data.py                # Data loading via yfinance
+│  ├─ models.py              # ORM models for SQLite (SQLAlchemy)
 │  ├─ strategies/
-│  │  ├─ base.py
+│  │  ├─ base.py             # Strategy base class
 │  │  ├─ moving_average_crossover.py
 │  │  ├─ rsi_strategy.py
-│  │  └─ ...
-│  ├─ optimiser.py
-│  ├─ visualisation.py
-│  └─ app_v2.py
-├─ tests/
-├─ run_backtest.py
-├─ requirements.txt
-├─ README.html
+│  │  └─ mean_reversion.py
+│  ├─ optimiser.py           # Parameter search/optimisation utilities
+│  ├─ visualisation.py       # Plotting and analytics helpers
+│  └─ app_v2.py              # Streamlit dashboard
+├─ tests/                    # pytest-based unit tests
+├─ run_backtest.py           # CLI entrypoint for backtests
+├─ requirements.txt          # Python dependencies
 └─ assets/
-   └─ equity_curve.png
-</code></pre>
-    </section>
+   └─ equity_curve.png       # Sample equity curve output
+```
 
-    <section>
-      <h2>Performance Snapshot (Example)</h2>
-      <div class="metrics">
-        <div class="metric"><strong>Total Return</strong><div>+31.94%</div></div>
-        <div class="metric"><strong>CAGR</strong><div>+7.19%</div></div>
-        <div class="metric"><strong>Sharpe</strong><div>0.70</div></div>
-        <div class="metric"><strong>Max Drawdown</strong><div>-9.80%</div></div>
-        <div class="metric"><strong>Win Rate</strong><div>73%</div></div>
-      </div>
+This structure follows common patterns used in production-grade backtesting libraries.[11][10]
 
-      <p style="margin-top:12px;">(Replace these values with your real results or include a small table screenshot)</p>
+***
 
-      <div style="margin-top:14px;">
-        <img src="assets/equity_curve.png" alt="Equity Curve" style="max-width:100%; border-radius:8px; border:1px solid #e6eef7;" onerror="this.style.display='none'"/>
-      </div>
-    </section>
+## Usage Examples
 
-    <section>
-      <h2>How to Present This on Your Resume</h2>
-      <ul>
-        <li><strong>Short line:</strong> Built a modular quant backtesting engine in Python (Polars, Streamlit) with strategy optimisation and institutional-grade metrics (Sharpe, Sortino, CAGR).</li>
-        <li><strong>Longer bullets:</strong> See the <code>docs/</code> or the project summary in the repo for suggested bullets and screenshots.</li>
-      </ul>
-    </section>
+- Run a moving average crossover backtest on a single ticker  
+- Optimise lookback windows for MA crossover using `optimiser.py`  
+- Compare RSI and mean reversion strategies across multiple tickers in the dashboard  
+- Inspect stored runs in SQLite to analyse robustness across time frames[2][8]
 
-    <section>
-      <h2>Next Steps / Roadmap</h2>
-      <ul>
-        <li>Add portfolio-level multi-asset backtesting</li>
-        <li>Model transaction costs & realistic slippage</li>
-        <li>Deploy dashboard to Streamlit Cloud / Heroku</li>
-        <li>Export backtest PDF reports and downloadable CSVs</li>
-      </ul>
-    </section>
+(You can add concrete code snippets here, such as how to define a new strategy class, once your API is final.)
 
-    <section class="footer">
-      <div>Made with ❤️ by <strong>Your Name</strong> — <a href="mailto:youremail@example.com">youremail@example.com</a></div>
-      <div style="margin-top:8px;">License: MIT — see <code>LICENSE</code> for details.</div>
-    </section>
-  </div>
-</body>
-</html>
+***
+
+## Roadmap
+
+Planned future enhancements:
+
+- Multi-asset portfolio backtesting and position sizing  
+- Transaction cost and slippage modelling  
+- Walk-forward and out-of-sample optimisation  
+- PDF or HTML export of backtest reports  
+- Deployment of the Streamlit dashboard online (e.g., Streamlit Cloud or similar)[6][1]
+
+***
+
+## How to Mention on Your Resume
+
+Example bullet points:
+
+- Built a modular quantitative trading backtesting engine in Python (Polars, Pandas) with multiple strategies, parameter optimisation, and institutional-grade performance analytics (Sharpe, Sortino, drawdowns, CAGR).[4][1]
+- Developed an interactive Streamlit dashboard and integrated SQLite + SQLAlchemy for storing, comparing, and visualising historical backtest results.[5][1]
+
+***
+
+## Author
+
+**Author**:Abhilash Reddy Mitta
+**Email**: abhilashreddymitta[@gmail.com]()  
+
