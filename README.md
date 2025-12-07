@@ -193,5 +193,5 @@ Example bullet points:
 ## Author
 
 **Author**:Abhilash Reddy Mitta
-**Email**: abhilashreddymitta[@gmail.com]()  
+**Email**: abhilashreddymitta@gmail.com
 
