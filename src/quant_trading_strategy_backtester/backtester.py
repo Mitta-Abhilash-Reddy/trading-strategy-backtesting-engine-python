@@ -181,7 +181,6 @@ class Backtester:
         )
         max_drawdown = float(drawdowns.cast(pl.Float64).min())  # type: ignore
 
-       
         # Calculate CAGR
         start_value = float(self.results["equity_curve"][0])
         end_value = float(self.results["equity_curve"][-1])
@@ -190,11 +189,11 @@ class Backtester:
 
         # Annual Volatility
         daily_returns = self.results["strategy_returns"].cast(pl.Float64)
-        annual_volatility = float(daily_returns.std() * (252 ** 0.5))
+        annual_volatility = float(daily_returns.std() * (252**0.5))
 
         # Downside deviation for Sortino
         downside = daily_returns.filter(daily_returns < 0)
-        downside_vol = float(downside.std() * (252 ** 0.5)) if downside.len() > 0 else 0
+        downside_vol = float(downside.std() * (252**0.5)) if downside.len() > 0 else 0
         sortino_ratio = (cagr / downside_vol) if downside_vol != 0 else float("nan")
 
         # Number of trades (from signals)
@@ -205,8 +204,16 @@ class Backtester:
         win_rate = wins / num_trades if num_trades > 0 else float("nan")
 
         # Profit Factor
-        gross_profit = float(self.results["strategy_returns"].filter(self.results["strategy_returns"] > 0).sum())
-        gross_loss = -float(self.results["strategy_returns"].filter(self.results["strategy_returns"] < 0).sum())
+        gross_profit = float(
+            self.results["strategy_returns"]
+            .filter(self.results["strategy_returns"] > 0)
+            .sum()
+        )
+        gross_loss = -float(
+            self.results["strategy_returns"]
+            .filter(self.results["strategy_returns"] < 0)
+            .sum()
+        )
         profit_factor = gross_profit / gross_loss if gross_loss != 0 else float("nan")
 
         return {
@@ -220,7 +227,7 @@ class Backtester:
             "Win Rate": float(win_rate),
             "Profit Factor": float(profit_factor),
         }
-    
+
     def plot_equity_curve(self, filename="equity_curve.png"):
         import matplotlib.pyplot as plt
 
@@ -237,11 +244,25 @@ class Backtester:
 
         # Buy (position changes from 0 to 1)
         buy_signals = positions.diff() > 0
-        plt.scatter(dates[buy_signals], equity[buy_signals], color="green", marker="^", label="Buy", s=80)
+        plt.scatter(
+            dates[buy_signals],
+            equity[buy_signals],
+            color="green",
+            marker="^",
+            label="Buy",
+            s=80,
+        )
 
         # Sell (position changes from 1 to 0)
         sell_signals = positions.diff() < 0
-        plt.scatter(dates[sell_signals], equity[sell_signals], color="red", marker="v", label="Sell", s=80)
+        plt.scatter(
+            dates[sell_signals],
+            equity[sell_signals],
+            color="red",
+            marker="v",
+            label="Sell",
+            s=80,
+        )
 
         plt.title("Equity Curve with Buy/Sell Signals")
         plt.xlabel("Date")
@@ -252,9 +273,6 @@ class Backtester:
         plt.tight_layout()
         plt.savefig(filename)
         plt.close()
-
-
-        
 
     def save_results(self) -> None:
         """

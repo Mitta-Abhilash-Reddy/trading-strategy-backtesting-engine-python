@@ -1,24 +1,21 @@
 import streamlit as st
 import datetime
-import polars as pl
 
 from quant_trading_strategy_backtester.data import (
     load_yfinance_data_one_ticker,
-    load_yfinance_data_two_tickers,
 )
 from quant_trading_strategy_backtester.backtester import Backtester
-from quant_trading_strategy_backtester.strategies.moving_average_crossover import MovingAverageCrossoverStrategy
+from quant_trading_strategy_backtester.strategies.moving_average_crossover import (
+    MovingAverageCrossoverStrategy,
+)
 from quant_trading_strategy_backtester.strategies.rsi_strategy import RSIStrategy
-from quant_trading_strategy_backtester.visualisation import plot_equity_curve, plot_strategy_returns
-from quant_trading_strategy_backtester.optimiser import run_backtest
+from quant_trading_strategy_backtester.visualisation import (
+    plot_strategy_returns,
+)
 
 # --------------------------- UI CONFIG ---------------------------
 
-st.set_page_config(
-    page_title="Quant Trading Backtester",
-    layout="wide",
-    page_icon="📈"
-)
+st.set_page_config(page_title="Quant Trading Backtester", layout="wide", page_icon="📈")
 
 st.title("📈 Quant Trading Strategy Backtester — Modern Dashboard")
 
@@ -26,7 +23,7 @@ st.title("📈 Quant Trading Strategy Backtester — Modern Dashboard")
 page = st.sidebar.radio(
     "Navigation",
     ["Run Backtest", "Optimisation", "Historical Results", "About"],
-    index=0
+    index=0,
 )
 
 # --------------------------- RUN BACKTEST PAGE ---------------------------
@@ -43,8 +40,7 @@ if page == "Run Backtest":
 
     with col2:
         strategy_name = st.selectbox(
-            "Select Strategy",
-            ["Moving Average Crossover", "RSI Strategy"]
+            "Select Strategy", ["Moving Average Crossover", "RSI Strategy"]
         )
 
         if strategy_name == "Moving Average Crossover":
@@ -86,11 +82,9 @@ if page == "Run Backtest":
         m4.metric("CAGR", f"{metrics['CAGR']:.2%}")
 
         st.subheader("Equity Curve")
-        import os
+
         image_path = r"C:\Users\hi\Desktop\projects\QUANT\quant-trading-strategy-backtester\equity_curve.png"
         st.image(image_path)
-
-
 
         st.subheader("Strategy Returns by Month")
         plot_strategy_returns(results, ticker, ticker)

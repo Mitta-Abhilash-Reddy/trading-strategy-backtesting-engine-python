@@ -1,6 +1,7 @@
 import polars as pl
 from quant_trading_strategy_backtester.strategies.base import BaseStrategy
 
+
 class RSIStrategy(BaseStrategy):
     def __init__(self, params):
         super().__init__(params)
@@ -26,18 +27,20 @@ class RSIStrategy(BaseStrategy):
         rs = avg_gain / avg_loss
         rsi = 100 - (100 / (1 + rs))
 
-        signals = data.with_columns([
-            rsi.alias("RSI"),
-        ])
+        signals = data.with_columns(
+            [
+                rsi.alias("RSI"),
+            ]
+        )
 
         # Generate positions using RSI
         signals = signals.with_columns(
             pl.when(rsi < self.lower)
-              .then(1)
-              .when(rsi > self.upper)
-              .then(0)
-              .otherwise(0)
-              .alias("positions")
+            .then(1)
+            .when(rsi > self.upper)
+            .then(0)
+            .otherwise(0)
+            .alias("positions")
         )
 
         return signals
